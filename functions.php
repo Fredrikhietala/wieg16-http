@@ -1,8 +1,1 @@
-<?php
-// "HTTP/1.0 404 Not Found"
-function status_header($code = 200) {}
-
-// [header => värde]
-function headers(array $headers = []) {}
-
-function redirect($url, $code = 302) {}
+<?phpini_set('display_errors', 1);ini_set('display_startup_errors', 1);error_reporting(E_ALL);// "HTTP/1.0 404 Not Found"function status_header($code = 200) {    $status_code = [        200 => "OK",        301 => "Moved permanently",        400 => "Bad request",        404 => "Not found",        500 => "Internal server error",        503 => "Service unavailable"    ];    header("HTTP/1.1 " . $code . " " . $status_code[$code]);}status_header(200);// [header => värde]function headers(array $headers = []) {    foreach ($headers as $key => $value) {        header("$key: $value");    }}headers([    "connection" => "Upgrade"]);function redirect($url, $code = 302) {    header('Location:' . $url);}redirect('www.google.com');
